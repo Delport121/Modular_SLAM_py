@@ -1,0 +1,82 @@
+/**:
+  ros__parameters:
+
+    # Global parameters
+    # Frame IDs
+    global_frame_id: "map"
+    odom_frame_id: "odom"
+    robot_frame_id: "base_link"
+
+    # Data logging
+    save_dir: "/home/ruan/dev_ws/src/lidar_slam_3d/results"
+    test_name: "Lab_3d"
+
+    # Frontend parameters
+    # Topics
+    lidar_topic: "/points_raw"   # '/ouster/points' # /velodyne_points # cloud_deskewed
+    imu_topic: "/imu_plugin/out"      # /gpsimu_driver/imu_data
+    odom_topic: "/odometry/filtered"
+    
+    # Feature toggles
+    Log_data: true 
+    publish_tf: false
+    use_odom: true
+    publish_point_map: false
+    publish_map_array_msg: false  # needs to be true for Euclidean
+
+    # Mapping parameters
+    voxel_downsample_res: 0.2
+    map_local_voxel_res: 0.2 
+    map_local_horizon: 800 # Any voxel not accessed after this number of frames can be deleted
+    map_local_clear_cycle: 100 # Any voxel not accessed after this number of frames can be deleted
+    map_local_bound_radius: 20.0
+    trans_for_mapupdate_: 1.0  # Distance threshold for map update
+    map_pub_downsample_res: 0.1
+
+    # Outlier filtering parameters
+    enable_outlier_filtering: false
+    statistical_nb_neighbors: 20      # Number of neighbors for statistical outlier removal
+    statistical_std_ratio: 2.0        # Standard deviation ratio threshold
+    radius_outlier_nb_points: 16      # Minimum number of neighbors in radius
+    radius_outlier_radius: 0.05       # Search radius for outlier removal (meters)
+    range_filter_min: 0.3       #0.3      # Minimum range filter (meters)
+    range_filter_max: 50.0  #20.0          # Maximum range filter (meters)
+
+    # Backend parameters
+    # Scan Context
+    use_scan_context: true   # Use Scan Context for loop closure
+    SCM_num_rings: 20        # Number of rings
+    SCM_num_sectors: 60      # Number of sectors
+    SCM_max_radius: 8.0      # Maximum radius of the scan context
+    SCM_num_candidates: 10
+    SCM_loop_threshold: 0.15
+    SCM_recent_node_exclusion: 30   # Number of recent nodes to exclude in loop detection
+    SCM_try_loop_detection_gap: 30
+    SCM_map_construct_gap: 30       # Gap for constructing the map
+
+    # Euclidean loop closure parameters
+    loop_detection_period: 3.0            # Period for loop detection in seconds
+    number_of_adjacent_constraints: 5     # Number of adjacent constraints to consider
+    loop_closure_distance: 12.0           # Distance threshold for loop closure
+    loop_closure_search_radius: 2.0       # Search radius for loop closure
+    search_submap_num: 3                  # Number of submaps to search for loop closure
+    loop_submap_clouds_downsample_res: 0.01   # Downsample resolution for loop submap clouds
+    min_fitness_score: 1.0                # Minimum fitness score for loop closure (Loop closure threshold)
+    map_global_downsample_res: 0.1        # Search radius for loop closure
+
+    # Pose graph parameters
+    PGM_prior_covariance: [1.0e-6, 1.0e-6, 1.0e-6, 1.0e-4, 1.0e-4, 1.0e-4]
+    PGM_odom_covariance: [0.5, 0.5, 0.5, 0.1, 0.1, 0.1]
+    PGM_loop_covariance: [0.5, 0.5, 0.5, 0.1, 0.1, 0.1]
+
+    # Occupancy grid map parameters
+    occupancy_grid_publish: false
+    publish_unmodified_map: true          # Warning: Will slow down the system if True
+    trans_for_unmodified_mapupdate: 2.0   # Distance threshold for map update
+    map_resolution: 0.1                   # Resolution of the occupancy grid map
+    map_initial_size: 10                  # Initial size of the occupancy grid map
+    p_occ: 0.7                            # Probability of occupancy
+    p_free: 0.3                           # Probability of free space
+    uniform_expand: true                  # Uniformly expand the map
+    z_threshold: 0.6                      # Height threshold for occupancy grid update
+    

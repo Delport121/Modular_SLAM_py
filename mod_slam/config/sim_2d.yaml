@@ -1,0 +1,89 @@
+/**:
+  ros__parameters:
+
+    # Global parameters
+    # Frame IDs
+    global_frame_id: "map"
+    sensor_frame_id: "laser_frame"     # lidar2d_1_laser
+    odom_frame_id: "odom"
+    robot_frame_id: "base_link"
+
+    # Data logging
+    save_dir: "/home/ruan/dev_ws/src/lidar_slam_2d/results"
+    test_name: "real_lab_euc"           # Name of the log file without extension
+    log_data: true                      # Flag to enable/disable data logging
+
+    # Frontend parameters
+    # Topics
+    lidar_topic: "/scan"                # /a200_1057/sensors/lidar2d_1/scan
+
+    # Feature toggles
+    publish_tf: true
+    use_odom: true
+    trans_for_mapupdate_: 1.0           # Distance threshold for map update
+
+    # Scan-to-map matching parameters
+    scan_map_max_iterations: 300
+    scan_map_tolerance: 1.0e-15
+    scan_map_visualize: false
+    scan_matching_error_threshold: 2.0  # Threshold for scan matching error (e.g., lab 0.5)
+    max_translation: 1.0                # Maximum allowable translation between scans (meters)
+    max_rotation: 30                    # Maximum allowable rotation between scans (degrees)
+
+    # Noise filtering parameters
+    enable_noise_filtering: false
+    noise_filter_method: "statistical"  # 'statistical' | 'median' | 'gradient' | 'combined'
+    statistical_k_neighbors: 10
+    statistical_std_threshold: 2.0
+    median_window_size: 5
+    gradient_max_threshold: 0.5
+
+    # Map management parameters
+    filter_dis: 0.1
+    grid_downsample_res: 0.1            # 0.08 (lab 0.25)
+    merge_dis: 0.2
+    lidar_exclusion_radius: 0.1         # 10 cm exclusion around lidar
+
+    # Occupancy grid map parameters (2D map_* namespace)
+    occupancy_grid_publish: false
+    map_resolution: 0.1
+    map_initial_size: 10
+    map_p_occ: 0.7
+    map_p_free: 0.3
+    map_uniform_expand: true
+
+    # Backend parameters
+    # Scan Context (loop closure)
+    use_scan_context: true              # Use Scan Context for loop closure
+    SCM_num_rings: 20                   # 20 | 40
+    SCM_num_sectors: 60                 # 60 | 80
+    SCM_max_radius: 8.0                 # Maximum radius of the scan context
+    SCM_num_candidates: 10
+    SCM_loop_threshold: 0.16
+    SCM_recent_node_exclusion: 500      # Number of recent nodes to exclude in loop detection
+    SCM_try_loop_detection_gap: 30
+    SCM_map_construct_gap: 30           # Gap for constructing the map
+
+    # Euclidean loop closure parameters
+    loop_detection_period: 3.0               # Period for loop detection in seconds
+    number_of_adjacent_constraints: 5        # Number of adjacent constraints to consider
+    loop_closure_distance: 12.0              # Distance threshold for loop closure
+    loop_closure_search_radius: 2.0          # Search radius for loop closure
+    search_submap_num: 3                     # Number of submaps to search for loop closure
+    loop_submap_clouds_downsample_res: 0.01  # Downsample resolution for loop submap clouds
+    min_fitness_score: 1.0                   # Loop closure threshold
+    map_global_downsample_res: 0.1           # For global search
+
+    # Pose graph parameters
+    PGM_prior_covariance: [1.0e-6, 1.0e-6, 1.0e-6, 1.0e-4, 1.0e-4, 1.0e-4]
+    PGM_odom_covariance:  [0.5, 0.5, 0.5, 0.1, 0.1, 0.1]
+    PGM_loop_covariance:  [0.5, 0.5, 0.5, 0.1, 0.1, 0.1]
+
+    # Occupancy grid map parameters (additional options matching your 3D-style block)
+    publish_unmodified_map: true             # Warning: Will slow down the system if True
+    trans_for_unmodified_mapupdate: 2.0      # Distance threshold for unmodified map update
+    p_occ: 0.7                               # Probability of occupancy
+    p_free: 0.3                              # Probability of free space
+    uniform_expand: true                     # Uniformly expand the map
+    z_threshold: 0.6                         # Height threshold for occupancy grid update
+
