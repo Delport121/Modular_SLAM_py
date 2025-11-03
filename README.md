@@ -8,7 +8,6 @@ This package provides a flexible SLAM system with both 2D and 3D capabilities, f
 - Front-end processing for both 2D and 3D LiDAR data
 - Back-end optimization using pose graph optimization
 - Loop closure detection using Scan Context
-- Support for various robot platforms (Husky, Voyager, etc.)
 
 ## Package Structure
 
@@ -28,7 +27,8 @@ This package provides a flexible SLAM system with both 2D and 3D capabilities, f
 - NumPy
 - Open3D
 - SciPy
-- NetworkX (for pose graph optimization)
+- SmallGICP
+- GTSAM
 
 ## Installation
 
@@ -81,12 +81,12 @@ Configuration files are located in the `config/` directory. You can modify param
 
 ## License
 
-[Add your license here]
+
 
 ## Authors
 
-[Add author information]
+P.J. Delport
 
 ## Acknowledgments
 
-[Add acknowledgments if applicable]
+
